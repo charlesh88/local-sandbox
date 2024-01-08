@@ -6,13 +6,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>SVG Progress</h1>
-<div id="progress-holder" class="c-svg-progress"></div>
-<div id="progress-holder-2" class="c-svg-progress">
+<div class="c-svg-progress">
     <svg viewBox="0 0 100 100">
-        <g class="sectors">
-            <path id="progress-path" d="M 50 0 A 50 50 0 0 1 53.1 0.1 L 50 50 L 50 0 Z"></path>
-        </g>
+        <circle class="c-svg-progress__bg" r="50" cx="50" cy="50"></circle>
+        <path class="c-svg-progress__progress" id="svg-progress-path"></path>
+        <circle class="c-svg-progress__ticks" r="40" cx="50" cy="50" stroke-dasharray="3 7.472"></circle>
     </svg>
 </div>
 </body>

@@ -1,8 +1,27 @@
+$c: #ccc;
+
 body {
-  background: red;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  background: #333;
+  color: $c;
 }
 
 .c-svg-progress {
-  width: 20%;
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10%;
+
+  &__bg {
+    fill: rgba(black, 0.2);
+  }
+
+  &__ticks {
+    fill: none;
+    stroke: #666;
+    stroke-width: 6;
+  }
+
+  &__progress {
+    fill: $c;
+  }
 }
