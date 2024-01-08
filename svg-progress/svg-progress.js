@@ -1,5 +1,4 @@
-// https://marian-caikovski.medium.com/drawing-sectors-and-pie-charts-with-svg-paths-b99b5b6bf7bd
-
+/************** https://marian-caikovski.medium.com/drawing-sectors-and-pie-charts-with-svg-paths-b99b5b6bf7bd */
 function getD(radius, startAngle, endAngle) {
     const isCircle = endAngle - startAngle === 360;
     if (isCircle) {
@@ -18,7 +17,8 @@ function getD(radius, startAngle, endAngle) {
             "L", start.x, start.y,
             "Z");
     }
-    return d.join(" ");
+    const o = d.join(" ");
+    return o;
 }
 
 function polarToCartesian(radius, angleInDegrees) {
@@ -33,74 +33,45 @@ function round(n) {
     return Math.round(n * 10) / 10;
 }
 
-function pie(radius, ...vals) {
-    const total = vals.reduce((a, b) => a + b, 0);
-    console.log(total);
-    const data = vals.map((val) => ({val, degrees: (val / total) * 360}));
-    console.log(data);
-    data.forEach((o, i, ar) => {
-        if (!i) {
-            o.from = 0;
-            o.to = o.degrees;
-        } else {
-            o.from = ar[i - 1].to;
-            o.to = o.from + o.degrees;
-        }
-        o.path = path(getD(radius, o.from, o.to), i);
-    });
-    return svg(radius * 2, data.map((o) => o.path).join(""));
-}
-
-function svg(width, content) {
-    return `<svg viewBox="0 0 ${width} ${width}"><g class='sectors'>${content}</g></svg>`;
-}
-
-function path(d, idx) {
-    return `<path d='${d}' class='type${idx}'/>`;
-}
-
-/************************************************************************* MY STUFF */
-let curProg = 0;
-let progId;
+/************************************************************************* CHARLES STUFF */
+const SVG_VB_SIZE = 100;
+const PATH_ID = 'svg-progress-path';
+const UPDATE_RATE_MS = 1000; // 1 Hz
+const TEST_START_MS = 0; // Datetime start of the Activity
+const TEST_END_MS = 3 * 60 * 1000; // Datetime end of the Activity
+const DURATION = TEST_END_MS - TEST_START_MS;
+const TEST_NOW_MS = 1.3 * 60 * 1000; // Current "now"
+const UPDATE_PER_CYCLE = 100 / (DURATION / UPDATE_RATE_MS);
+let curProgressPercent = 0;
+let progressIntervalId;
 
 function progToDegrees(progVal) {
-    return progVal/100 * 360;
+    return progVal / 100 * 360;
 }
 
-function progressSvg(size, content) {
-    return `<svg viewBox="0 0 ${size} ${size}"><g class='sectors'>${content}</g></svg>`;
-}
-
-function progressPath(d) {
-    return `<path d='${d}'/>`;
-}
-
-function progress(val) {
-    // Val is a integer percentage of 100, e.g. 0 to 100
-    const svgDim = 100;
-    // Convert val to degrees
-    const path = progressPath(getD(svgDim / 2, 0, progToDegrees(val)));
-    document.getElementById('progress-holder').innerHTML = progressSvg(svgDim, path);
-}
-
-function progress2(val) {
-    const svgDim = 100;
-    const pPath = document.getElementById('progress-path');
-    pPath.setAttribute('d', getD(svgDim / 2, 0, progToDegrees(val)));
+function renderProgress(val) {
+    document.getElementById(PATH_ID).setAttribute('d', getD(SVG_VB_SIZE / 2, 0, progToDegrees(val)));
 }
 
 function progressAnimate() {
-    if (curProg <= 100) {
-        progress2(curProg++);
+    renderProgress(curProgressPercent);
+
+    if (curProgressPercent < 100) {
+        // If the remaining percent is less than UPDATE_PER_CYCLE, round up to 100%.
+        // Otherwise, increment by UPDATE_PER_CYCLE.
+        curProgressPercent = ((100 - curProgressPercent) < UPDATE_PER_CYCLE) ? 100 : curProgressPercent += UPDATE_PER_CYCLE;
     } else {
-        clearInterval(progId);
+        clearInterval(progressIntervalId);
     }
 }
 
 function main() {
-    // progress2(86);
-    const updateMs = 100;
-    progId = setInterval('progressAnimate()',updateMs);
+    if (TEST_NOW_MS > TEST_START_MS) {
+        // Now is after activity start datetime
+        curProgressPercent = (1 - ((TEST_END_MS - TEST_NOW_MS) / DURATION)) * 100;
+    }
+    progressAnimate();
+    progressIntervalId = setInterval('progressAnimate()', UPDATE_RATE_MS);
 }
 
 document.addEventListener("DOMContentLoaded", main);
