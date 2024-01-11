@@ -1,0 +1,71 @@
+body {
+  background: #333;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  color: #ccc;
+  margin: 10px;
+}
+
+.c-timelist--large .c-tli {
+  background: #444;
+  border-radius: 3px;
+  display: grid;
+  padding: 5px;
+  grid-template-columns: min-content 2fr 40px 1fr;
+  grid-column-gap: 5px;
+}
+.c-timelist--large .c-tli__activity-color {
+  align-items: start;
+  display: flex;
+  padding-top: 3px;
+}
+.c-timelist--large .c-tli__activity-color-swatch {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+.c-timelist--large .c-tli__bounds {
+  font-size: 0.8em;
+}
+.c-timelist--large .c-tli__title {
+  font-size: 1.3em;
+}
+.c-timelist--large .c-tli__time-hero {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.c-timelist--large .c-tli__time-hero > * + * {
+  margin-left: 5px;
+}
+.c-timelist--large .c-tli__time-hero-context {
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+.c-timelist--large .c-tli__time-hero-time {
+  font-size: 1.3em;
+}
+.c-timelist--large .c-tli__time-hero-time:before {
+  display: inline-block;
+  margin-right: 3px;
+}
+.c-timelist--large .c-tli__time-hero-time.--is-countdown:before {
+  content: "-";
+}
+.c-timelist--large .c-tli__time-hero-time.--is-countup:before {
+  content: "+";
+}
+
+.c-svg-progress__bg {
+  fill: rgba(0, 0, 0, 0.2);
+}
+.c-svg-progress__ticks {
+  fill: none;
+  stroke: #666;
+  stroke-width: 6;
+}
+.c-svg-progress__progress {
+  fill: #ccc;
+}
+
+/*# sourceMappingURL=styles.css.map */

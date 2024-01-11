@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Progress v1.0</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="c-timelist c-timelist--large">
+    <div class="c-tli --is-current --is-in-progress">
+        <div class="c-tli__activity-color">
+            <div class="c-tli__activity-color-swatch"
+                style="background-color: #ffcc00"></div>
+        </div>
+        <div class="c-tli__title-and-bounds">
+            <div class="c-tli__title">
+                Title
+            </div>
+            <div class="c-tli__bounds">
+                <span class="c-tli__duration">45m</span>
+                <span class="c-tli__start-time">02:00:00</span>
+                <span class="c-tli__end-time">07:30:00</span>
+            </div>
+        </div>
+        <div class="c-tli__progress-pie">
+            <svg viewBox="0 0 100 100">
+            <circle class="c-svg-progress__bg" r="50" cx="50" cy="50"></circle>
+            <path class="c-svg-progress__progress" id="svg-progress-path"></path>
+            <circle class="c-svg-progress__ticks" r="40" cx="50" cy="50" stroke-dasharray="3 7.472"></circle>
+            </svg>
+        </div>
+        <div class="c-tli__time-hero">
+            <div class="c-tli__time-hero-context">Starts</div>
+            <div class="c-tli__time-hero-time --is-countdown">00:10:58</div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
