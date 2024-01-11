@@ -1,0 +1,25 @@
+body {
+  background: #333;
+  color: #ccc;
+}
+
+.c-svg-progress {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10%;
+}
+.c-svg-progress__bg {
+  fill: rgba(0, 0, 0, 0.2);
+}
+.c-svg-progress__ticks {
+  fill: none;
+  stroke: #666;
+  stroke-width: 6;
+}
+.c-svg-progress__progress {
+  fill: #ccc;
+}
+
+/*# sourceMappingURL=styles.css.map */
